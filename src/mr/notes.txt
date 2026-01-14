@@ -1,0 +1,18 @@
+If implementign the failure tolerance on completed map tasks
+then I should construct a mechanism which notifies current workers about the
+updated map task
+
+This mechanism also ensures that no indefinite waiting will happen
+i.e no available worker and all of them are working on reduce task and waiting on intermediate files
+
+For this assignment, I am assuming that completed map tasks will be set as completed and no failure tolerance is needed for them
+
+In a sense, all of the reduce tasks starts only after all of the map tasks are completed.
+
+Also, in my current implementation workers are asking for the job from master, not that master is assigning them one.
+Because of that I also need to implement additional API to check whether what actions worker needs to do 
+(i. when worker is checking for alivenes for example), however this approach is complex. 
+For that reason, it would be a lot easier if only master handles every worker,
+so in a sense, workers are just slaves. Why am I not doing that, because I need to implement rpc server on workers
+so master call them and control. Worker only needs to contact master for registering itself and that's it.
+
